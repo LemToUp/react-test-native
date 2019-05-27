@@ -8,10 +8,7 @@ function WidgetPanel(props) {
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [forceUpdateVariable, forceUpdate] = useState(false);
 
-    const onToggleFilter = (e) => {
-        console.log(e);
-        e.stopPropagation();
-        e.preventDefault();
+    const onToggleFilter = () => {
         toggleFilter(!isFilterShow);
     };
 
@@ -34,13 +31,13 @@ function WidgetPanel(props) {
                     renderItem={({item}) => <Text>{item}</Text>}
                 />
             </View>
-            <View>
-                <Filter
-                    isShow={isFilterShow}
+            <View style={styles.filter}>
+                {isFilterShow && <Filter
+                    isShow={true}
                     closeEvent={onToggleFilter}
                     onGetData={onGetFilters}
                     name={`filter_${props.number}`}
-                />
+                />}
             </View>
         </View>
     );
@@ -63,6 +60,9 @@ const styles = StyleSheet.create({
         flex:1,
         backgroundColor: '#ffffff',
         marginLeft: '5%',
+    },
+    filter: {
+        backgroundColor: 'rgba(0, 0, 0, 0)',
     },
 });
 
